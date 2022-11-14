@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import EmailForm from "./components/EmailForm";
+import DataTable from "./components/DataTable";
+import { useState } from "react";
 
 function App() {
+  const [tableData, setTableData] = useState([]);
+
+  const handleFormSubmit = (e) => {
+    fetch(`http://localhost:4000/breaches/${e}`)
+      .then((res) => res.json())
+      .then((data) => setTableData(data));
+  };
+
+  const handleClearData = () => {
+    setTableData([]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <InternalUseWrapper>
+      <EmailForm
+        handleFormSubmit={(e) => handleFormSubmit(e)}
+        clearData={handleClearData}
+      />
+      <DataTable queryData={tableData} clearData={handleClearData} />
+    </InternalUseWrapper>
   );
 }
 
