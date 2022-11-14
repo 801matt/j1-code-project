@@ -6,7 +6,7 @@ function App() {
   const [tableData, setTableData] = useState([]);
 
   const handleFormSubmit = (e) => {
-    fetch(`http://localhost:4000/breaches/${e}`)
+    fetch(`https://j1-code-project--backend.herokuapp.com/breaches/${e}`)
       .then((res) => res.json())
       .then((data) => setTableData(data));
   };
@@ -16,13 +16,13 @@ function App() {
   };
 
   return (
-    <InternalUseWrapper>
+    <>
       <EmailForm
         handleFormSubmit={(e) => handleFormSubmit(e)}
         clearData={handleClearData}
       />
       <DataTable queryData={tableData} clearData={handleClearData} />
-    </InternalUseWrapper>
+    </>
   );
 }
 

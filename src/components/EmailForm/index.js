@@ -65,13 +65,9 @@ const InternalUseSection = styled.section`
   }
 `;
 
-const EmailForm = ({ handleFormSubmit, clearData }) => {
+const EmailForm = ({ handleFormSubmit }) => {
   const [formData, setFormData] = useState("");
   const [formValidationHint, setFormValidationHint] = useState("");
-
-  const clearData = () => {
-    formData("");
-  };
 
   const handleFormInput = (e) => {
     let userInput = e.target.value;
